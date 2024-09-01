@@ -1,10 +1,15 @@
 <script setup >
 import { onMounted } from 'vue'
-import NavBar from '../components/Navbar.vue'
-import hero_banner from '../assets/hero_banner.jpg'
+import { useRoute } from 'vue-router'
 import { useMoviesStore } from '../store/movies'
-import TitleCards from '../components/TitleCards.vue'
+
+import hero_banner from '../assets/hero_banner.jpg'
 import LoadingSpinner from '../components/LoadingSpinner.vue'
+import NavBar from '../components/Navbar.vue'
+import TitleCards from '../components/TitleCards.vue'
+
+const route = useRoute()
+const routeName = route.name
 
 const moviesStore = useMoviesStore()
 
@@ -30,22 +35,44 @@ onMounted(async () => {
           />
         </div>
       </div>
+
       <div class="pl-[6%]">
-        <TitleCards 
-          v-if="moviesStore.movies_top_rated && moviesStore.movies_top_rated.results && moviesStore.movies_top_rated.results.length" 
-          title="Melhores filmes da semana" 
-          :movies="moviesStore.movies_top_rated.results" 
-        />
-        <TitleCards 
-          v-if="moviesStore.movies && moviesStore.movies.results && moviesStore.movies.results.length" 
-          title="Principais escolhas para você" 
-          :movies="moviesStore.movies.results" 
-        />
-        <TitleCards 
-          v-if="moviesStore.series && moviesStore.series.results && moviesStore.series.results.length" 
-          title="Principais séries da semana" 
-          :movies="moviesStore.series.results"
-        />
+        <div v-if="routeName === 'home'">
+          <TitleCards 
+            v-if="moviesStore.movies_top_rated && moviesStore.movies_top_rated.results && moviesStore.movies_top_rated.results.length" 
+            title="Melhores filmes da semana" 
+            :movies="moviesStore.movies_top_rated.results" 
+          />
+          <TitleCards 
+            v-if="moviesStore.movies && moviesStore.movies.results && moviesStore.movies.results.length" 
+            title="Principais escolhas para você" 
+            :movies="moviesStore.movies.results" 
+          />
+          <TitleCards 
+            v-if="moviesStore.series && moviesStore.series.results && moviesStore.series.results.length" 
+            title="Principais séries da semana" 
+            :movies="moviesStore.series.results"
+          />
+        </div>
+        <div v-else-if="routeName === 'movies'">
+          <TitleCards 
+            v-if="moviesStore.movies_top_rated && moviesStore.movies_top_rated.results && moviesStore.movies_top_rated.results.length" 
+            title="Melhores filmes da semana" 
+            :movies="moviesStore.movies_top_rated.results" 
+          />
+          <TitleCards 
+            v-if="moviesStore.movies && moviesStore.movies.results && moviesStore.movies.results.length" 
+            title="Principais escolhas para você" 
+            :movies="moviesStore.movies.results" 
+          />
+        </div>
+        <div v-else-if="routeName === 'series'">
+          <TitleCards 
+            v-if="moviesStore.series && moviesStore.series.results && moviesStore.series.results.length" 
+            title="Principais séries da semana" 
+            :movies="moviesStore.series.results"
+          />
+        </div>
       </div>
     </div>
   </div>

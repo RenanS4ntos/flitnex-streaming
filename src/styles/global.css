@@ -9,7 +9,7 @@
 }
 
 body {
-  background: black;
+  background: #121214;
   color: white;
 }
 
@@ -26,7 +26,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #202024;
 }
 
 ::-webkit-scrollbar-thumb {

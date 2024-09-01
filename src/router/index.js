@@ -5,6 +5,7 @@ const routes = [
   { path: '/', name: 'home', component: Home },
   { path: '/movies', name: 'movies', component: Home },
   { path: '/series', name: 'series', component: Home },
+  { path: '/player/:id', name: 'player', component: import('../pages/Player.vue') },
   { path: '/:pathMatch(.*)*', name: 'not-found', component: import('../pages/NotFound.vue')},
 ]
 
