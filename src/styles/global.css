@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: black;
+  color: white;
+}
+
+@layer utilities {
+  .mask-gradient {
+    mask-image: linear-gradient(180deg, black, transparent 70%);
+    -webkit-mask-image: linear-gradient(180deg, black, transparent 70%);
+  }
+}
