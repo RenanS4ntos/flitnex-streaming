@@ -211,7 +211,8 @@ export const useMoviesStore = defineStore('movies', () => {
     movies,
     movies_top_rated,
     movies_popular,
-    series
+    series,
+    loading
     // genres,
     // people,
   }

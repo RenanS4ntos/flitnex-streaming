@@ -1,9 +1,7 @@
 <script setup>
-import { ref } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import 'swiper/css/navigation'
-const hoveredMovie = ref(null)
 
 const props = defineProps({
   title: {
@@ -25,7 +23,7 @@ const props = defineProps({
     <h2 class="mb-2 text-2xl font-bold">{{ title }}</h2>
     <Swiper
       :space-between="10"
-      :slides-per-view="7"
+      :slides-per-view="6"
       :navigation="false"
       :pagination="{ clickable: true }"
       :loop="false"
@@ -36,18 +34,14 @@ const props = defineProps({
       >
         <div 
           class="relative movie-card cursor-pointer"
-          @mouseover="hoveredMovie = movie.id"
-          @mouseleave="hoveredMovie = null"
         >
           <img 
             :src="`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`" 
             alt="Card Image" 
-            class="w-[240px] rounded transition-opacity duration-300 ease-in-out" 
-            :class="{'opacity-70': hoveredMovie === movie.id}"
+            class="w-[300px] rounded transition-opacity duration-300 ease-in-out hover:opacity-60" 
           />
           <p 
             class="absolute bottom-[10px] ml-4 text-white bg-black bg-opacity-75 p-2 rounded"
-            v-show="hoveredMovie === movie.id"
           >
             {{ movie.name || movie.title }}
           </p>
