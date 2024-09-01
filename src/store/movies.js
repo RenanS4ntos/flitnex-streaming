@@ -1,6 +1,6 @@
-import { defineStore } from "pinia"
-import axios from "axios"
-import { ref, toRaw } from "vue"
+import { defineStore } from 'pinia'
+import { ref, toRaw } from 'vue'
+import axios from 'axios'
 
 export const useMoviesStore = defineStore('movies', () => {
   const MOVIES_DB_KEY = import.meta.env.VITE_TMDB_SECRET
@@ -13,8 +13,7 @@ export const useMoviesStore = defineStore('movies', () => {
   const movies_top_rated = ref(null)
   const movies_popular = ref(null)
   const series = ref(null)
-  // const genres = ref(null)
-  // const people = ref(null)
+  const movie = ref(null)
   const options = {
     headers: {
       accept: 'application/json',
@@ -174,6 +173,19 @@ export const useMoviesStore = defineStore('movies', () => {
       })
   }
 
+  const fetchMovieById = async (id) => {
+    try {
+      const response = await axios.get(`${BASE_URL}movie/${id}/videos`, options)
+      if (response.status !== 200) {
+        throw new Error(`Error fetching movie with ID ${id}: ${response.statusText}`)
+      }
+      movie.value = response.data
+    } catch (error) {
+      console.error(error)
+      errors.value.push(`Erro ao buscar filme com ID ${id}: ${error.message}`)
+    }
+  }
+
   const init = async () => {
     loading.value = true
     db.value = await openDataBase()
@@ -212,6 +224,8 @@ export const useMoviesStore = defineStore('movies', () => {
     movies_top_rated,
     movies_popular,
     series,
+    movie,
+    fetchMovieById,
     loading
     // genres,
     // people,

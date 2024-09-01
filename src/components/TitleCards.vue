@@ -32,20 +32,22 @@ const props = defineProps({
         v-for="movie in movies"
         :key="movie.id"
       >
-        <div 
-          class="relative movie-card cursor-pointer"
-        >
-          <img 
-            :src="`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`" 
-            alt="Card Image" 
-            class="w-[300px] rounded transition-opacity duration-300 ease-in-out hover:opacity-60" 
-          />
-          <p 
-            class="absolute bottom-[10px] ml-4 text-white bg-black bg-opacity-75 p-2 rounded"
+        <router-link :to="`/player/${movie.id}`">
+          <div 
+            class="relative movie-card cursor-pointer"
           >
-            {{ movie.name || movie.title }}
-          </p>
-        </div>
+            <img 
+              :src="`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`" 
+              alt="Card Image" 
+              class="w-[300px] rounded transition-opacity duration-300 ease-in-out hover:opacity-60" 
+            />
+            <p 
+              class="absolute bottom-[10px] ml-4 text-white bg-black bg-opacity-75 p-2 rounded"
+            >
+              {{ movie.name || movie.title }}
+            </p>
+          </div>
+        </router-link>
       </SwiperSlide>
     </Swiper>
   </div>
