@@ -3,11 +3,14 @@ import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useMoviesStore } from '../store/movies'
 import { PhCaretCircleLeft } from '@phosphor-icons/vue'
+import { useMovies } from '../composable'
 
 const route = useRoute()
 const router = useRouter()
-const movieId = route.params.id
 const moviesStore = useMoviesStore()
+const { toLocalDate } = useMovies()
+
+const movieId = route.params.id
 const movie = ref(null)
 
 const goBack = () => {
@@ -39,7 +42,7 @@ onMounted(async () => {
       allowFullScreen
     ></iframe>
     <div class="p-10 flex items-center justify-between w-[90%] card mt-3">
-      <p>{{ movie?.published_at.slice(0,10) }}</p>
+      <p>{{ toLocalDate(movie?.published_at.slice(0,10)) }}</p>
       <p>{{ movie?.name }}</p>
       <p>{{ movie?.type }}</p>
     </div>
